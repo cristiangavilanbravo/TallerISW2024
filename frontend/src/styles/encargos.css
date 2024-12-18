@@ -1,0 +1,30 @@
+.table-container {
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .table-container .tabulator {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-container .tabulator .tabulator-col {
+    background-color: #003366;
+    color: #fff;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table-container .tabulator .tabulator-footer .tabulator-page {
+    background-color: #fff;
+    color: black;
+    border: 1px solid #003366;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .table-container .tabulator .tabulator-footer .tabulator-page.active {
+    color: #E4332C;
+  }
+  
