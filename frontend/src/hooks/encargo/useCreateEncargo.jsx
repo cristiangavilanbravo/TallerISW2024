@@ -1,26 +1,21 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { createEncargo } from "@services/encargo.service";
 
-export const useCreateEncargo = () => {
-    const [error, setError] = useState('');
+export function useCreateEncargo() {
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
-    const createEncargo = async (data) => {
-        try {
-            const response = await fetch('/api/encargos', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-            if (!response.ok) {
-                throw new Error('Error al crear el encargo');
-            }
-            return response.json();
-        } catch (error) {
-            setError(error.message);
-        }
-    };
+  const submitEncargo = async (data) => {
+    try {
+      setError(null);
+      setSuccess(false); // Reinicia el estado antes de hacer la solicitud
+      await createEncargo(data); // Llama al servicio para crear el encargo
+      setSuccess(true); // Indica éxito si no hay errores
+    } catch (err) {
+      setError("Error al crear el encargo. Por favor, intenta nuevamente.");
+      console.error(err);
+    }
+  };
 
-    return {
-        error,
-        createEncargo,
-    };
-};
+  return { error, success, submitEncargo };
+}

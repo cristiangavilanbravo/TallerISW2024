@@ -1,14 +1,35 @@
-.table-container .tabulator .tabulator-col {
-    background-color: #003366;
-    color: #fff;
+/* Asegura que las columnas no se expandan demasiado */
+.table-container .tabulator .tabulator-col[data-field="rol"] {
+    width: 120px; /* Ancho ajustado para la columna de rol */
+    max-width: 120px; /* Límite máximo de ancho */
 }
-.tabulator .tabulator-footer .tabulator-page {
-    background-color: #fff;
-    color: black;
-    border: 1px solid #003366;
-    padding: 4px 8px;
-    border-radius: 4px;
+
+.table-container .tabulator .tabulator-col[data-field="disponibilidad"] {
+    width: 100px; /* Ancho ajustado para la columna de disponibilidad */
+    max-width: 100px; /* Límite máximo de ancho */
 }
-.tabulator .tabulator-footer .tabulator-page.active {
-    color: #E4332C;
+
+.table-container .tabulator .tabulator-col[data-field="createdAt"] {
+    width: 150px; /* Ancho ajustado para la columna de fecha de creación */
+    max-width: 150px; /* Límite máximo de ancho */
+}
+
+/* Ajustes adicionales para la columna de correo */
+.table-container .tabulator .tabulator-col[data-field="correo"] {
+    width: 200px; /* Puedes ajustar el ancho de esta columna si es necesario */
+}
+
+/* Ajustes para asegurar que las celdas se ajusten correctamente */
+.tabulator .tabulator-cell {
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto excede el espacio */
+    overflow: hidden; /* Evita que el texto se desborde */
+    white-space: nowrap; /* Impide que el texto se divida en varias líneas */
+}
+
+/* Aseguramos que las celdas no se expandan demasiado */
+.tabulator .tabulator-cell[data-field="rol"],
+.tabulator .tabulator-cell[data-field="disponibilidad"],
+.tabulator .tabulator-cell[data-field="createdAt"] {
+    padding: 0 10px; /* Reducir el espacio en las celdas */
+    text-align: center; /* Alineación centrada */
 }

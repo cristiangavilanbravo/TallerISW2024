@@ -10,7 +10,23 @@ export async function getUsers() {
         return error.response.data;
     }
 }
+export async function getUserById(userId) {
+    try {
+        const { data } = await axios.get(`/user/detail?id=${userId}`);
+        console.log('Datos completos del usuario:', data);
 
+        return {
+            id: data.data.id, // Asegúrate de acceder al objeto `data`
+            nombre: data.data.nombreCompleto || "Sin Nombre", // Usa `data.data` para acceder al nombre
+        };
+    } catch (error) {
+        console.error(`Error al obtener el mecánico con ID ${userId}:`, error.message);
+        return {
+            id: userId,
+            nombre: "Desconocido",
+        };
+    }
+}
 export async function updateUser(data, rut) {
     try {
         const response = await axios.patch(`/user/detail/?rut=${rut}`, data);

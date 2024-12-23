@@ -26,16 +26,17 @@ export async function login(dataUser) {
 export async function register(data) {
     try {
         const dataRegister = convertirMinusculas(data);
-        const { nombreCompleto, email, rut, password } = dataRegister
+        const { nombreCompleto, email, rut, password, rol = "usuario" } = dataRegister; 
         const response = await axios.post('/auth/register', {
             nombreCompleto,
             email,
             rut,
-            password
+            password,
+            rol, 
         });
         return response.data;
     } catch (error) {
-        return error.response.data;
+        return error.response?.data || { message: "Error al registrar el usuario" };
     }
 }
 

@@ -19,9 +19,11 @@ import{
 
 
 export const createEncargo = async (req, res) => {
+    console.log("Solicitud recibida en POST /encargo:", req.body);
     const [result, message] = await createEncargoService(req.body);
     if (result) {
         return res.status(201).json({ status: "success", message, details: result });
+        
     } else {
         return res.status(404).json({ status: "Client error", message, details: {} });
     }

@@ -1,3 +1,4 @@
+/* Contenedor principal */
 .main-container {
     display: flex;
     flex-direction: column;
@@ -5,46 +6,71 @@
     align-items: center;
     height: 100vh;
     width: 100%;
+    overflow: auto; /* Permite desplazamiento si el contenido supera la altura */
 }
 
+/* Contenedor de la tabla */
 .table-container {
-    width: 90%;
-    max-width: 1400px;
+    width: 95%;
+    max-width: 1700px;
     margin: 0 auto;
+    overflow-x: auto; /* Agrega desplazamiento horizontal para evitar desbordes */
 }
 
+/* Ajuste para columnas específicas de la tabla */
+.table-container .tabulator .tabulator-col[data-field="rol"],
+.table-container .tabulator .tabulator-col[data-field="disponibilidad"],
+.table-container .tabulator .tabulator-col[data-field="createdAt"] {
+    width: 120px; /* Ancho ajustado para las columnas */
+    max-width: 120px; /* Límite máximo */
+    min-width: 100px; /* Asegura que las columnas no se hagan demasiado pequeñas */
+    text-align: center; /* Centra el contenido */
+}
+
+/* Controles y encabezado */
 .top-table {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom: 15px; /* Espaciado adicional debajo del encabezado */
 }
 
 .title-table {
     color: #003366;
     margin-left: 70px;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
+/* Filtro y botones */
 .filter-actions {
     display: flex;
     gap: 10px;
-    button {
-        background: rgba(255, 255, 255, 0.87);
-        border: #fff;
-        cursor: pointer;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        
-    }
 }
 
+.filter-actions button {
+    background: rgba(255, 255, 255, 0.87);
+    border: none;
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+}
+
+/* Estilo para botones de eliminación */
 .delete-user-button {
     margin-right: 70px;
 }
 
+/* Estilos para dispositivos pequeños */
 @media (max-width: 767px) {
     .title-table {
         margin: 0;
+        text-align: center; /* Centra el título en dispositivos pequeños */
     }
+
     .top-table {
         display: flex;
         flex-direction: column;
@@ -58,15 +84,18 @@
     .filter-actions {
         margin-bottom: 10px;
     }
+
     .table-container {
         margin: 0;
-        width: 352px;
-        height: 500px;
+        width: 100%; /* Aprovecha el ancho disponible */
+        overflow-x: auto; /* Agrega desplazamiento horizontal en pantallas pequeñas */
     }
+
     .popup {
         width: 350px;
-        height: 600px;
+        height: auto;
     }
+
     .popup .form {
         padding: 20px;
     }
@@ -76,16 +105,22 @@
     }
 
     .popup .options-class {
-        width: 10px;
+        width: auto;
     }
 }
 
+/* Estilos para tablets */
 @media (min-width: 768px) and (max-width: 1024px) {
     .title-table {
         margin-left: 35px;
+        font-size: 1.2rem;
     }
 
     .delete-user-button {
         margin-right: 35px;
+    }
+
+    .table-container {
+        overflow-x: auto;
     }
 }

@@ -1,24 +1,27 @@
 import { useState } from 'react';
+import { deleteEncargo } from '@services/encargo.service'; 
 
-export const useDeleteEncargo = () => {
-    const [error, setError] = useState('');
+const useDeleteEncargo = (setEncargos) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    const deleteEncargo = async (id) => {
-        try {
-            const response = await fetch(`/api/encargos/${id}`, {
-                method: 'DELETE',
-            });
-            if (!response.ok) {
-                throw new Error('Error al eliminar el encargo');
-            }
-            return response.json();
-        } catch (error) {
-            setError(error.message);
-        }
-    };
+  const handleDelete = async (ids) => {
+    setLoading(true);
+    try {
+      
+      for (const id of ids) {
+        await deleteEncargo(id); 
+        setEncargos((prev) => prev.filter((encargo) => encargo.id !== id)); 
+      }
+    } catch (err) {
+      setError('Hubo un error al eliminar el encargo.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return {
-        error,
-        deleteEncargo,
-    };
+  return { handleDelete, loading, error };
 };
+
+export default useDeleteEncargo;

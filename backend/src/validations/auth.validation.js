@@ -56,7 +56,7 @@ export const registerValidation = Joi.object({
       "string.max": "El nombre completo debe tener como máximo 50 caracteres.",
       "string.pattern.base": "El nombre completo solo puede contener letras y espacios.",
     }),
-    rut: Joi.string()
+  rut: Joi.string()
     .min(9)
     .max(12)
     .required()
@@ -95,8 +95,14 @@ export const registerValidation = Joi.object({
       "string.max": "La contraseña debe tener como máximo 26 caracteres.",
       "string.pattern.base": "La contraseña solo puede contener letras y números.",
     }),
-})
-  .unknown(false)
-  .messages({
+  rol: Joi.string()
+    .valid("usuario", "administrador", "mecanico", "encargado de local")
+    .required()
+    .messages({
+      "string.empty": "El rol no puede estar vacío.",
+      "any.required": "El rol es obligatorio.",
+      "any.only": "El rol debe ser uno de los siguientes: usuario, administrador, mecanico, encargado de local.",
+    }),
+}).unknown(false).messages({
   "object.unknown": "No se permiten propiedades adicionales.",
 });

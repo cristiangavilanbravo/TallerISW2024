@@ -1,4 +1,5 @@
 "use strict";
+import { getRepository } from "typeorm";
 import {
   createUserService,
   deleteUserService,
@@ -15,6 +16,7 @@ import {
   handleErrorServer,
   handleSuccess,
 } from "../handlers/responseHandlers.js";
+import User from "../entity/user.entity.js";
 
 export async function createUser(req, res) {
   try {
@@ -92,7 +94,7 @@ export async function updateUser(req, res) {
       );
     }
 
-    // Validación de los datos del cuerpo de la solicitud
+    
     const { error: bodyError } = userBodyValidation.validate(body);
 
     if (bodyError) {

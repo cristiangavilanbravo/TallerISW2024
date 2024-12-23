@@ -12,7 +12,9 @@ const useUsers = () => {
                 rut: user.rut,
                 email: user.email,
                 rol: user.rol,
+                disponibilidad: user.rol === 'mecánico' ? (user.disponibilidad ? 'Disponible' : 'No Disponible') : 'No Aplica',
                 createdAt: user.createdAt
+                
             }));
             dataLogged(formattedData);
             setUsers(formattedData);
